@@ -85,7 +85,70 @@ Generate a JSON response with this exact structure:
   "risingSign": "{rising_sign_lowercase}",
   "planets": [
     {
-      "name": "Sun|Moon|Mercury|Venus|Mars|Jupiter|Saturn|Uranus|Neptune|Pluto",
+      "name": "Sun",
+      "sign": "{zodiac_sign_lowercase}",
+      "degree": (0-29),
+      "element": "fire|earth|air|water",
+      "retrograde": (false, sun is never retrograde)
+    },
+    {
+      "name": "Moon",
+      "sign": "{zodiac_sign_lowercase}",
+      "degree": (0-29),
+      "element": "fire|earth|air|water",
+      "retrograde": (true/false)
+    },
+    {
+      "name": "Mercury",
+      "sign": "{zodiac_sign_lowercase}",
+      "degree": (0-29),
+      "element": "fire|earth|air|water",
+      "retrograde": (true/false)
+    },
+    {
+      "name": "Venus",
+      "sign": "{zodiac_sign_lowercase}",
+      "degree": (0-29),
+      "element": "fire|earth|air|water",
+      "retrograde": (true/false)
+    },
+    {
+      "name": "Mars",
+      "sign": "{zodiac_sign_lowercase}",
+      "degree": (0-29),
+      "element": "fire|earth|air|water",
+      "retrograde": (true/false)
+    },
+    {
+      "name": "Jupiter",
+      "sign": "{zodiac_sign_lowercase}",
+      "degree": (0-29),
+      "element": "fire|earth|air|water",
+      "retrograde": (true/false)
+    },
+    {
+      "name": "Saturn",
+      "sign": "{zodiac_sign_lowercase}",
+      "degree": (0-29),
+      "element": "fire|earth|air|water",
+      "retrograde": (true/false)
+    },
+    {
+      "name": "Uranus",
+      "sign": "{zodiac_sign_lowercase}",
+      "degree": (0-29),
+      "element": "fire|earth|air|water",
+      "retrograde": (true/false)
+    },
+    {
+      "name": "Neptune",
+      "sign": "{zodiac_sign_lowercase}",
+      "degree": (0-29),
+      "element": "fire|earth|air|water",
+      "retrograde": (true/false)
+    },
+    {
+      "name": "Pluto",
       "sign": "{zodiac_sign_lowercase}",
       "degree": (0-29),
       "element": "fire|earth|air|water",
@@ -112,12 +175,12 @@ Generate a JSON response with this exact structure:
 
 Guidelines:
 - Calculate accurate planetary positions for the given date/time/location
-- Include all major planets plus Ascendant
+- **CRITICAL: Include ALL 10 planets** in the planets array: Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, and Pluto
 - Consider both tropical and sidereal calculations
 - Provide accurate house placements
 - Include major aspects only (conjunction, opposition, trine, square, sextile)
 - Degrees should be precise (0-29)
-- At least 5 planets and 3 aspects should be included
+- **REQUIRED: Exactly 10 planets must be included in the response**
 - ${language === 'th' ? 'คำนวณตำแหน่งดาวตามพิกัดที่ระบุ คำนึงถึงเขตเวลาของประเทศไทย' : 'Consider the specific geographic coordinates and time zone'}
 
 IMPORTANT: Return ONLY valid JSON without any additional text or explanations.

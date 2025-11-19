@@ -233,7 +233,7 @@ ${i18n.language === 'th' ? 'Birth Chart นี้ถูกสร้างเม�
               </CardContent>
             </Card>
 
-            {/* Planetary Positions */}
+            {/* Planetary Positions - Solar System Chart */}
             <Card>
               <CardHeader>
                 <h3 className="text-xl font-semibold text-white flex items-center gap-2">
@@ -242,30 +242,201 @@ ${i18n.language === 'th' ? 'Birth Chart นี้ถูกสร้างเม�
                 </h3>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {chart.planets.map((planet, index) => (
-                    <div
-                      key={index}
-                      className="p-4 bg-cosmic-800/30 rounded-lg border border-cosmic-700/30"
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="font-semibold text-cosmic-100">
-                          {t(`planets.${planet.name.toLowerCase()}`)}
-                        </div>
-                        <div className={`text-lg ${getElementColor(planet.element)}`}>
-                          {zodiacSigns[planet.sign]?.symbol}
-                        </div>
-                      </div>
-                      <div className="text-cosmic-200">
-                        {t(`zodiacNames.${planet.sign}`)} • {planet.degree}°
-                      </div>
-                      {planet.retrograde && (
-                        <div className="text-xs text-yellow-400 mt-1">
-                          {i18n.language === 'th' ? 'หนีซ้อน' : 'Retrograde'}
-                        </div>
-                      )}
+                {/* Solar System Visualization */}
+                <div className="mb-8">
+                  <div className="relative w-full max-w-md mx-auto aspect-square">
+                    {/* Orbital paths */}
+                    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
+                      {/* Orbital circles */}
+                      {[60, 90, 120, 150, 180].map((radius, index) => (
+                        <circle
+                          key={index}
+                          cx="200"
+                          cy="200"
+                          r={radius}
+                          fill="none"
+                          stroke="rgba(139, 92, 246, 0.1)"
+                          strokeWidth="1"
+                          strokeDasharray="2 4"
+                        />
+                      ))}
+
+                      {/* Sun in center */}
+                      <circle
+                        cx="200"
+                        cy="200"
+                        r="20"
+                        fill="url(#sunGradient)"
+                        className="drop-shadow-lg"
+                      />
+
+                      {/* Zodiac wheel */}
+                      {zodiacSigns && Object.entries(zodiacSigns).map(([sign, data], index) => {
+                        const angle = (index * 30) - 90; // Start at top (Aries)
+                        const x = 200 + 170 * Math.cos(angle * Math.PI / 180);
+                        const y = 200 + 170 * Math.sin(angle * Math.PI / 180);
+
+                        return (
+                          <g key={sign}>
+                            <text
+                              x={x}
+                              y={y}
+                              textAnchor="middle"
+                              dominantBaseline="middle"
+                              className="text-xs fill-cosmic-300"
+                              fontSize="12"
+                            >
+                              {data.symbol}
+                            </text>
+                          </g>
+                        );
+                      })}
+
+                      {/* Planets */}
+                      {(() => {
+                        // Debug: Log all planet data
+                        console.log('All planets data:', chart.planets);
+                        console.log('Available zodiac signs:', Object.keys(zodiacSigns));
+
+                        return chart.planets.map((planet, index) => {
+                          const normalizedSign = planet.sign.toLowerCase();
+                          const zodiacSign = zodiacSigns[normalizedSign];
+                          const signIndex = Object.keys(zodiacSigns).indexOf(normalizedSign);
+
+                          // Debug: log each planet's sign lookup
+                          console.log(`Planet ${index}:`, {
+                            name: planet.name,
+                            originalSign: planet.sign,
+                            normalizedSign: normalizedSign,
+                            zodiacSign: zodiacSign,
+                            element: zodiacSign?.element,
+                            color: zodiacSign ? getElementColor(zodiacSign.element) : 'gray (#6B7280)'
+                          });
+
+                          const baseAngle = (signIndex * 30) - 90;
+                          const planetAngle = baseAngle + (planet.degree / 12); // Distribute within sign
+                          const orbitRadius = 60 + (index * 30); // Different orbits for visual separation
+                          const x = 200 + orbitRadius * Math.cos(planetAngle * Math.PI / 180);
+                          const y = 200 + orbitRadius * Math.sin(planetAngle * Math.PI / 180);
+
+                          const planetSize = planet.name.toLowerCase() === 'sun' ? 16 :
+                                          planet.name.toLowerCase() === 'moon' ? 12 : 8;
+
+                          return (
+                            <g key={index}>
+                              <circle
+                                cx={x}
+                                cy={y}
+                                r={planetSize}
+                                fill={zodiacSign ? getElementColor(zodiacSign.element) : '#6B7280'}
+                                className="drop-shadow-md"
+                                stroke="rgba(255,255,255,0.3)"
+                                strokeWidth="1"
+                              />
+                              {planet.retrograde && (
+                                <text
+                                  x={x}
+                                  y={y + 4}
+                                  textAnchor="middle"
+                                  className="text-orange-400"
+                                  fontSize="10"
+                                  fontWeight="bold"
+                                >
+                                  ⚬
+                                </text>
+                              )}
+                            </g>
+                          );
+                        });
+                      })()}
+
+                      {/* Gradient definitions */}
+                      <defs>
+                        <radialGradient id="sunGradient">
+                          <stop offset="0%" stopColor="#FCD34D" />
+                          <stop offset="100%" stopColor="#F59E0B" />
+                        </radialGradient>
+                      </defs>
+                    </svg>
+                  </div>
+
+                  {/* Legend */}
+                  <div className="mt-6 text-center">
+                    <div className="text-sm text-cosmic-400 mb-2">
+                      {i18n.language === 'th' ?
+                        'แผนภูมิแสดงตำแหน่งดาวเคราะห์ในระบบสุริยจักรวาล' :
+                        'Planetary positions in the solar system'
+                      }
                     </div>
-                  ))}
+                    <div className="flex items-center justify-center gap-4 text-xs text-cosmic-400">
+                      <span>☉ {i18n.language === 'th' ? 'ดวงอาทิตย์' : 'Sun'}</span>
+                      <span>☽ {i18n.language === 'th' ? 'ดวงจันทร์' : 'Moon'}</span>
+                      <span>⚬ {i18n.language === 'th' ? 'ถอยหลัง' : 'Retrograde'}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Planet Details Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {chart.planets.map((planet, index) => {
+                    const normalizedSign = planet.sign.toLowerCase();
+                    const zodiacSign = zodiacSigns[normalizedSign];
+                    const planetIcon = planet.name.toLowerCase();
+
+                    return (
+                      <div
+                        key={index}
+                        className="p-4 bg-cosmic-800/30 rounded-lg border border-cosmic-700/30 hover:bg-cosmic-800/50 transition-colors"
+                        style={{
+                          borderColor: zodiacSign ? `${getElementColor(zodiacSign.element)}40` : undefined
+                        }}
+                      >
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-2">
+                            <div
+                              className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white"
+                              style={{
+                                background: zodiacSign ? getElementGradient(zodiacSign.element) : 'linear-gradient(135deg, #6B7280 0%, #4B5563 100%)'
+                              }}
+                            >
+                              {planet.name.charAt(0)}
+                            </div>
+                            <div>
+                              <div className="font-semibold text-cosmic-100">
+                                {t(`planets.${planetIcon}`)}
+                              </div>
+                              <div className="text-xs text-cosmic-400">
+                                {planet.retrograde && (
+                                  <span className="text-orange-400">⚬ {i18n.language === 'th' ? 'ถอยหลัง' : 'Retrograde'}</span>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="text-lg">
+                            {zodiacSign?.symbol}
+                          </div>
+                        </div>
+
+                        <div className="space-y-1">
+                          <div className="text-cosmic-200">
+                            {zodiacSign ? t(`zodiacNames.${normalizedSign}`) : planet.sign}
+                          </div>
+                          <div className="text-sm text-cosmic-400">
+                            {planet.degree}° {zodiacSign?.element && (
+                              <span className="ml-1 px-2 py-0.5 text-xs rounded-full bg-cosmic-700/50">
+                                {i18n.language === 'th' ?
+                                  (zodiacSign.element === 'fire' ? 'ไฟ' :
+                                   zodiacSign.element === 'earth' ? 'ดิน' :
+                                   zodiacSign.element === 'air' ? 'ลม' : 'น้ำ') :
+                                  zodiacSign.element
+                                }
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>

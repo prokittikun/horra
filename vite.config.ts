@@ -7,4 +7,8 @@ export default defineConfig({
     sourcemap: true,
   },
   plugins: [react()],
+  preview: {
+    port: 4173,
+    strictPort: false,
+  },
 })
