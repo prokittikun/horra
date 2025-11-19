@@ -73,9 +73,10 @@ export const DailyHoroscopePage: React.FC = () => {
   const [selectedSign, setSelectedSign] = useState<string>(
     searchParams.get('sign') || ''
   );
-  const [selectedDate, setSelectedDate] = useState<string>(
-    new Date().toISOString().split('T')[0]
-  );
+  const [selectedDate, setSelectedDate] = useState<string>(() => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  });
   const [horoscope, setHoroscope] = useState<DailyHoroscope | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -119,7 +120,8 @@ export const DailyHoroscopePage: React.FC = () => {
   };
 
   const getTodayDate = () => {
-    return new Date().toISOString().split('T')[0];
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   };
 
   return (
@@ -166,6 +168,7 @@ export const DailyHoroscopePage: React.FC = () => {
                     type="date"
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
+                    min={getTodayDate()}
                     max={getTodayDate()}
                     className="w-full px-4 py-2 bg-cosmic-800/50 border border-cosmic-700/30 rounded-lg text-white focus:border-cosmic-500 focus:outline-none focus:ring-2 focus:ring-cosmic-500/20"
                   />
