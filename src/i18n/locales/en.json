@@ -1,0 +1,141 @@
+{
+  "navigation": {
+    "home": "Home",
+    "zodiac": "Zodiac Signs",
+    "birthChart": "Birth Chart",
+    "dailyHoroscope": "Daily Horoscope",
+    "compatibility": "Compatibility"
+  },
+  "home": {
+    "title": "Welcome to Horra",
+    "subtitle": "Discover Your Cosmic Journey",
+    "description": "Explore the ancient wisdom of astrology with personalized birth charts, daily horoscopes, and compatibility insights.",
+    "exploreFeatures": "Explore Features",
+    "dailyHoroscope": "Daily Horoscope",
+    "birthChartAnalysis": "Birth Chart Analysis",
+    "compatibilityCheck": "Compatibility Check",
+    "zodiacGuide": "Zodiac Guide"
+  },
+  "zodiac": {
+    "title": "Zodiac Signs",
+    "subtitle": "Explore the twelve signs of the zodiac",
+    "selectSign": "Select a zodiac sign to learn more",
+    "element": "Element",
+    "quality": "Quality",
+    "rulingPlanet": "Ruling Planet",
+    "dateRange": "Date Range",
+    "strengths": "Strengths",
+    "weaknesses": "Weaknesses",
+    "luckyNumbers": "Lucky Numbers",
+    "luckyColors": "Lucky Colors",
+    "elements": {
+      "fire": "Fire",
+      "earth": "Earth",
+      "air": "Air",
+      "water": "Water"
+    },
+    "qualities": {
+      "cardinal": "Cardinal",
+      "fixed": "Fixed",
+      "mutable": "Mutable"
+    }
+  },
+  "birthChart": {
+    "title": "Birth Chart Analysis",
+    "subtitle": "Discover your unique astrological blueprint",
+    "name": "Name",
+    "birthDate": "Birth Date",
+    "birthTime": "Birth Time",
+    "birthLocation": "Birth Location",
+    "generateChart": "Generate Birth Chart",
+    "chartLoading": "Generating your birth chart...",
+    "sunSign": "Sun Sign",
+    "moonSign": "Moon Sign",
+    "risingSign": "Rising Sign",
+    "mercury": "Mercury",
+    "venus": "Venus",
+    "mars": "Mars",
+    "jupiter": "Jupiter",
+    "saturn": "Saturn",
+    "uranus": "Uranus",
+    "neptune": "Neptune",
+    "pluto": "Pluto"
+  },
+  "dailyHoroscope": {
+    "title": "Daily Horoscope",
+    "subtitle": "Your cosmic guidance for today",
+    "selectSign": "Select your zodiac sign",
+    "selectDate": "Select date",
+    "today": "Today",
+    "getHoroscope": "Get Horoscope",
+    "loading": "Getting your horoscope...",
+    "overall": "Overall",
+    "love": "Love",
+    "career": "Career",
+    "health": "Health",
+    "luckyNumber": "Lucky Number",
+    "luckyColor": "Lucky Color",
+    "mood": "Mood",
+    "advice": "Advice"
+  },
+  "compatibility": {
+    "title": "Compatibility Check",
+    "subtitle": "Discover your cosmic connection",
+    "personA": "Person A",
+    "personB": "Person B",
+    "name": "Name",
+    "birthDate": "Birth Date",
+    "checkCompatibility": "Check Compatibility",
+    "loading": "Analyzing compatibility...",
+    "overallCompatibility": "Overall Compatibility",
+    "loveCompatibility": "Love Compatibility",
+    "friendshipCompatibility": "Friendship Compatibility",
+    "communication": "Communication",
+    "trust": "Trust",
+    "values": "Shared Values",
+    "conflictResolution": "Conflict Resolution",
+    "recommendations": "Recommendations"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "required": "Required",
+    "optional": "Optional",
+    "language": "Language"
+  },
+  "language": {
+    "english": "English",
+    "thai": "ไทย"
+  },
+  "zodiacNames": {
+    "aries": "Aries",
+    "taurus": "Taurus",
+    "gemini": "Gemini",
+    "cancer": "Cancer",
+    "leo": "Leo",
+    "virgo": "Virgo",
+    "libra": "Libra",
+    "scorpio": "Scorpio",
+    "sagittarius": "Sagittarius",
+    "capricorn": "Capricorn",
+    "aquarius": "Aquarius",
+    "pisces": "Pisces"
+  },
+  "planets": {
+    "sun": "Sun",
+    "moon": "Moon",
+    "mercury": "Mercury",
+    "venus": "Venus",
+    "mars": "Mars",
+    "jupiter": "Jupiter",
+    "saturn": "Saturn",
+    "uranus": "Uranus",
+    "neptune": "Neptune",
+    "pluto": "Pluto"
+  }
+}
